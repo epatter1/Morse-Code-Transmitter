@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.transmitButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Thank", "You Jesus!");          }
+                Log.i("Key", "Value");          }
         });
 
 
