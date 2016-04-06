@@ -4,6 +4,7 @@ import android.text.Html;
 import android.text.Spanned;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 //import java.util.LinkedList;
 //import static edu.ggc.lutz.grizzlymorsecode.Signal.*;
 
@@ -13,7 +14,9 @@ public class MorseCode {
     private static int DI_LENGTH = 50;             // msecs
     private static int INTER_SYMB_SPACE = 50;      //
     private static int INTER_WORD_SPACE = 200;      //
-    private static int INTER_CHAR_SPACE = 100;      //
+    private static int INTER_CHAR_SPACE = 100;
+    final static boolean ON = true;
+    final static boolean OFF = false;//
 
     static {
         map = new HashMap<>();
@@ -40,39 +43,38 @@ public class MorseCode {
 
     }
 
-    //TODO need to define ON and OFF
     public static String getDitDah(char _c) {
         return map.get(Character.toLowerCase(_c));
     }
-//    public static LinkedList<Signal> genOnOffSchedule(String _s, int _defer) {
-//        LinkedList<Signal> result = new LinkedList<>();
-//        long accumulated = _defer;
-//
-//        for (int i = 0; i < _s.length(); i++) {
-//
-//            String didah = getDitDah(_s.charAt(i));
-//            if (didah == null) continue;
-//
-//            for (int j = 0; j < didah.length(); j++) {
-//                if (didah.charAt(j) == '.') {
-//                    result.add(new Signal(i, ON, accumulated, DI_LENGTH));
-//                    accumulated += DI_LENGTH;
-//                    result.add(new Signal(i, OFF, accumulated, INTER_SYMB_SPACE));
-//                    accumulated += INTER_SYMB_SPACE;
-//                } else if (didah.charAt(j) == '-') {
-//                    result.add(new Signal(i, ON, accumulated, DI_LENGTH * 3));
-//                    accumulated += (DI_LENGTH * 3);
-//                    result.add(new Signal(i, OFF, accumulated, INTER_SYMB_SPACE));
-//                    accumulated += INTER_SYMB_SPACE;
-//                } else if (didah.charAt(j) == ' ') {
-//                    result.add(new Signal(i, OFF, INTER_WORD_SPACE, INTER_WORD_SPACE));
-//                }
-//            }
-//
-//            accumulated += INTER_CHAR_SPACE;
-//        }
-//        return result;
-//    }
+    public static LinkedList<Signal> genOnOffSchedule(String _s, int _defer) {
+        LinkedList<Signal> result = new LinkedList<>();
+        long accumulated = _defer;
+
+        for (int i = 0; i < _s.length(); i++) {
+
+            String didah = getDitDah(_s.charAt(i));
+            if (didah == null) continue;
+
+            for (int j = 0; j < didah.length(); j++) {
+                if (didah.charAt(j) == '.') {
+                    result.add(new Signal(i, ON, accumulated, DI_LENGTH));
+                    accumulated += DI_LENGTH;
+                    result.add(new Signal(i, OFF, accumulated, INTER_SYMB_SPACE));
+                    accumulated += INTER_SYMB_SPACE;
+                } else if (didah.charAt(j) == '-') {
+                    result.add(new Signal(i, ON, accumulated, DI_LENGTH * 3));
+                    accumulated += (DI_LENGTH * 3);
+                    result.add(new Signal(i, OFF, accumulated, INTER_SYMB_SPACE));
+                    accumulated += INTER_SYMB_SPACE;
+                } else if (didah.charAt(j) == ' ') {
+                    result.add(new Signal(i, OFF, INTER_WORD_SPACE, INTER_WORD_SPACE));
+                }
+            }
+
+            accumulated += INTER_CHAR_SPACE;
+        }
+        return result;
+    }
 
     // useful if we elect to change individual characters within an EditText view
     public static Spanned annotateMessage(int _position, String _message) {
