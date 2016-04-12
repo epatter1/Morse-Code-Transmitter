@@ -3,6 +3,10 @@
     <string name="action_settings">Settings</string>
     <string name="transmitTextField">Text to Transmit:</string>
     <string name="transmitButton">TRANSMIT</string>
+    <string name="title_activity_about_act">About</string>
+    <string name="name">Elisha Patterson</string>
+    <string name="appDescription">This is an app that converts text to morse code based off a mapping of characters to their appropriate dot and dash values. Additionally, there is a flashing light and sound that plays the morse code of whatever was typed in.</string>
+    <string name="aboutBtn">ABOUT</string>
 
 
 </resources>
