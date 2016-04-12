@@ -21,9 +21,8 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private Integer isDone = 0;
-    final Button transmitBtn = (Button)findViewById(R.id.transmitButton);
+    private Button transmitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-
+       transmitBtn = (Button)findViewById(R.id.transmitButton);
         Button aboutBtn = (Button) findViewById(R.id.aboutButton);
         aboutBtn.setOnClickListener(new View.OnClickListener() {
 
